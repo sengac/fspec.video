@@ -1,0 +1,196 @@
+{
+  "scenarios": [
+    {
+      "name": "Use config file defaults for recording options",
+      "testMappings": [
+        {
+          "file": "src/__tests__/configuration-file-support.test.ts",
+          "lines": "32-58",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CLI options override config file settings",
+      "testMappings": [
+        {
+          "file": "src/__tests__/configuration-file-support.test.ts",
+          "lines": "62-88",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reject invalid JSON in config file",
+      "testMappings": [
+        {
+          "file": "src/__tests__/configuration-file-support.test.ts",
+          "lines": "92-117",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Validate config file options same as CLI",
+      "testMappings": [
+        {
+          "file": "src/__tests__/configuration-file-support.test.ts",
+          "lines": "120-148",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Use built-in defaults when no config file exists",
+      "testMappings": [
+        {
+          "file": "src/__tests__/configuration-file-support.test.ts",
+          "lines": "151-175",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 5,
+    "coveredScenarios": 5,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/configuration-file-support.test.ts"
+    ],
+    "implFiles": [
+      "src/index.ts"
+    ],
+    "totalLinesCovered": 234
+  }
+}

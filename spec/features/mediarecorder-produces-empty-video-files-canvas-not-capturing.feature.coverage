@@ -1,0 +1,62 @@
+{
+  "scenarios": [
+    {
+      "name": "Empty video file when canvas not actively repainted",
+      "testMappings": [
+        {
+          "file": "src/__tests__/mediarecorder-canvas-capture.test.ts",
+          "lines": "29-48",
+          "implMappings": []
+        }
+      ]
+    },
+    {
+      "name": "Non-empty video file with continuous canvas repaints",
+      "testMappings": [
+        {
+          "file": "src/__tests__/mediarecorder-canvas-capture.test.ts",
+          "lines": "50-75",
+          "implMappings": []
+        }
+      ]
+    },
+    {
+      "name": "Add requestAnimationFrame loop to force canvas repaints",
+      "testMappings": [
+        {
+          "file": "src/__tests__/mediarecorder-canvas-capture.test.ts",
+          "lines": "77-105",
+          "implMappings": [
+            {
+              "file": "src/recorder.ts",
+              "lines": [
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 3,
+    "coveredScenarios": 3,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/mediarecorder-canvas-capture.test.ts"
+    ],
+    "implFiles": [
+      "src/recorder.ts"
+    ],
+    "totalLinesCovered": 85
+  }
+}

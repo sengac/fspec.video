@@ -1,0 +1,117 @@
+{
+  "scenarios": [
+    {
+      "name": "Shell demo script uses correct tui-test API",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-api-validation.test.ts",
+          "lines": "8-36",
+          "implMappings": [
+            {
+              "file": "demos/shell-commands.test.ts",
+              "lines": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fspec TUI demo script uses correct API",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-api-validation.test.ts",
+          "lines": "38-65",
+          "implMappings": [
+            {
+              "file": "demos/fspec-navigation.test.ts",
+              "lines": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Broken demo script with TestController import fails",
+      "testMappings": []
+    },
+    {
+      "name": "Migrated demo script works correctly",
+      "testMappings": []
+    }
+  ],
+  "stats": {
+    "totalScenarios": 4,
+    "coveredScenarios": 2,
+    "coveragePercent": 50,
+    "testFiles": [
+      "src/__tests__/demo-api-validation.test.ts"
+    ],
+    "implFiles": [
+      "demos/shell-commands.test.ts",
+      "demos/fspec-navigation.test.ts"
+    ],
+    "totalLinesCovered": 117
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "project": {
+    "name": "fspec.videos",
+    "vision": "Create automated, consistent, and reproducible demo videos of fspec's Terminal User Interface, enabling scalable documentation and onboarding through scripted terminal recordings.",
+    "projectType": "cli-tool"
+  },
+  "problemSpace": {
+    "primaryProblem": {
+      "title": "Manual terminal demo recording is time-consuming, error-prone, and difficult to maintain",
+      "description": "When creating documentation and tutorials for fspec, developers need to produce demo videos showing the TUI in action. Manual recording requires screen capture software, careful typing to avoid mistakes, and multiple takes to achieve professional results. Each time fspec's UI changes or new features are added, all affected videos must be re-recorded from scratch. This creates a maintenance burden that makes it impractical to maintain a comprehensive library of up-to-date demo videos. The result is either outdated documentation or significant time investment in manual video production.",
+      "impact": "high"
+    }
+  },
+  "solutionSpace": {
+    "overview": "Automated demo video generation through scriptable terminal interactions, allowing developers to define demo scenarios as code that can be executed and recorded on demand. Demo scripts are version-controlled alongside the codebase, ensuring videos stay synchronized with features and can be regenerated instantly whenever the UI changes.",
+    "capabilities": [
+      {
+        "name": "Record Terminal Demo Videos",
+        "description": "Execute demo scripts and capture the terminal interactions as video files with configurable size, FPS, and format"
+      },
+      {
+        "name": "Write Scriptable Demo Scenarios",
+        "description": "Define terminal interaction scenarios as version-controlled TypeScript scripts using the tui-test framework"
+      },
+      {
+        "name": "List Available Demo Scripts",
+        "description": "View all available demo scripts in the project"
+      }
+    ]
+  },
+  "personas": [
+    {
+      "name": "fspec Documentation Maintainer",
+      "description": "Developer responsible for maintaining fspec's documentation, including demo videos",
+      "goals": [
+        "Generate professional demo videos quickly and consistently",
+        "Regenerate videos whenever fspec UI changes"
+      ]
+    },
+    {
+      "name": "Demo Script Author",
+      "description": "Developer who writes TypeScript demo scripts that define terminal interaction scenarios",
+      "goals": [
+        "Create realistic, automated demo scenarios",
+        "Script terminal interactions in a maintainable way"
+      ]
+    }
+  ]
+}

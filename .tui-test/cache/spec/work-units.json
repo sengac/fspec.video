@@ -1,0 +1,826 @@
+{
+  "version": "0.7.1",
+  "meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-11-08T02:08:27.266Z"
+  },
+  "workUnits": {
+    "VID-001": {
+      "id": "VID-001",
+      "title": "Audit current implementation to identify working features, bugs, and gaps",
+      "type": "task",
+      "status": "done",
+      "createdAt": "2025-11-08T00:11:16.120Z",
+      "updatedAt": "2025-11-08T00:14:25.186Z",
+      "children": [],
+      "description": "Comprehensive audit of fspec.videos to systematically test all capabilities, identify bugs, document what works and what doesn't, and create actionable work units (bug fixes and stories) based on findings. This includes: testing CLI commands, verifying demo scripts, checking video recording functionality, and identifying missing features or documentation.",
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T00:11:43.157Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T00:11:54.113Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T00:14:14.931Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T00:14:25.186Z"
+        }
+      ],
+      "architectureNotes": [
+        {
+          "id": 0,
+          "text": "## Audit Findings\n\n### What Works:\n- ✓ Build process completes successfully\n- ✓ CLI commands (--help, record, list) are functional\n- ✓ All three demo scripts exist and follow consistent patterns\n- ✓ Tests pass (3/3)\n- ✓ Server HTML template properly configured with xterm.js\n\n### Bugs Found:\n1. BUG: List command is hardcoded - only shows basic-usage.ts despite 3 demo scripts existing (kanban-workflow.ts, spec-review.ts)\n2. BUG: No validation of recording options - negative dimensions accepted without error\n\n### Test Coverage Gaps:\n3. Tests are superficial - don't actually test recording functionality\n4. No integration tests for demo script execution\n5. No tests for server startup/cleanup\n\n### Missing Features:\n6. Demo scripts have hardcoded fspec path (~/projects/fspec/dist/index.js)\n7. No configuration file support for default paths\n8. No documentation in README about recording workflow\n9. No example output videos committed to repository\n\n### Technical Debt:\n10. recorder.ts has commented @ts-expect-error without proper type definitions\n11. No error handling for missing demo scripts when recording",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:13:22.217Z"
+        }
+      ],
+      "nextNoteId": 1,
+      "rules": [],
+      "examples": [],
+      "questions": [],
+      "nextRuleId": 0,
+      "nextExampleId": 0,
+      "nextQuestionId": 0,
+      "updated": "2025-11-08T00:14:25.186Z"
+    },
+    "VID-002": {
+      "id": "VID-002",
+      "title": "List command only shows one demo script instead of all three",
+      "type": "bug",
+      "status": "done",
+      "createdAt": "2025-11-08T00:13:28.085Z",
+      "updatedAt": "2025-11-08T00:36:51.098Z",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T00:32:00.296Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T00:34:11.312Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T00:35:16.818Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T00:36:26.670Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T00:36:51.098Z"
+        }
+      ],
+      "userStory": {
+        "role": "developer using fspec-videos",
+        "action": "list all available demo scripts",
+        "benefit": "I can discover and choose from all demo options"
+      },
+      "rules": [
+        {
+          "id": 0,
+          "text": "List command must scan src/demos directory for all TypeScript files",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:20.313Z"
+        },
+        {
+          "id": 1,
+          "text": "List command must display all found demo scripts in alphabetical order",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:21.629Z"
+        },
+        {
+          "id": 2,
+          "text": "Each demo script must be displayed with its relative path from project root",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:23.337Z"
+        },
+        {
+          "id": 3,
+          "text": "List command must show usage instructions with example fspec-videos record command",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:24.850Z"
+        }
+      ],
+      "nextRuleId": 4,
+      "examples": [
+        {
+          "id": 0,
+          "text": "User runs 'fspec-videos list' and sees all three demo scripts: basic-usage.ts, kanban-workflow.ts, spec-review.ts",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:34.682Z"
+        },
+        {
+          "id": 1,
+          "text": "Demo scripts are displayed in alphabetical order",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:36.270Z"
+        },
+        {
+          "id": 2,
+          "text": "Each script shows path 'src/demos/<filename>.ts'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:38.478Z"
+        },
+        {
+          "id": 3,
+          "text": "Output includes example usage: 'Run with: fspec-videos record -s src/demos/basic-usage.ts'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:32:40.099Z"
+        }
+      ],
+      "nextExampleId": 4,
+      "estimate": 2,
+      "questions": [],
+      "architectureNotes": [],
+      "nextQuestionId": 0,
+      "nextNoteId": 0,
+      "updated": "2025-11-08T00:36:51.098Z"
+    },
+    "VID-003": {
+      "id": "VID-003",
+      "title": "Recording options accept invalid values without validation",
+      "type": "bug",
+      "status": "done",
+      "createdAt": "2025-11-08T00:13:33.392Z",
+      "updatedAt": "2025-11-08T00:25:13.395Z",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T00:15:19.269Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T00:19:06.846Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T00:21:01.466Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T00:24:00.777Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T00:25:13.395Z"
+        }
+      ],
+      "userStory": {
+        "role": "developer using fspec-videos",
+        "action": "provide valid recording options",
+        "benefit": "the tool prevents errors and provides clear feedback when options are invalid"
+      },
+      "rules": [
+        {
+          "id": 0,
+          "text": "Terminal width must be a positive integer greater than 0",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:35.975Z"
+        },
+        {
+          "id": 1,
+          "text": "Terminal height must be a positive integer greater than 0",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:37.595Z"
+        },
+        {
+          "id": 2,
+          "text": "FPS must be a positive integer between 1 and 120",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:39.077Z"
+        },
+        {
+          "id": 3,
+          "text": "Script path must point to an existing TypeScript file",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:40.535Z"
+        },
+        {
+          "id": 4,
+          "text": "Validation errors must provide clear, actionable error messages",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:42.001Z"
+        },
+        {
+          "id": 5,
+          "text": "Yes, set maximum width to 300 and maximum height to 100 (reasonable terminal sizes)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:17:28.678Z"
+        },
+        {
+          "id": 6,
+          "text": "Yes, validate that output directory exists or can be created before starting recording",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:17:30.281Z"
+        }
+      ],
+      "nextRuleId": 7,
+      "examples": [
+        {
+          "id": 0,
+          "text": "User runs record with width=-1, receives error: 'Width must be greater than 0'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:52.851Z"
+        },
+        {
+          "id": 1,
+          "text": "User runs record with height=0, receives error: 'Height must be greater than 0'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:54.373Z"
+        },
+        {
+          "id": 2,
+          "text": "User runs record with fps=200, receives error: 'FPS must be between 1 and 120'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:55.683Z"
+        },
+        {
+          "id": 3,
+          "text": "User runs record with non-existent script, receives error: 'Script file not found: path/to/script.ts'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:57.663Z"
+        },
+        {
+          "id": 4,
+          "text": "User runs record with valid options (width=120, height=30, fps=30), validation passes",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:15:59.255Z"
+        },
+        {
+          "id": 5,
+          "text": "User runs record with width=400, receives error: 'Width must be between 1 and 300'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:17:39.797Z"
+        },
+        {
+          "id": 6,
+          "text": "User runs record with height=150, receives error: 'Height must be between 1 and 100'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:17:41.220Z"
+        },
+        {
+          "id": 7,
+          "text": "User runs record with output='/invalid/readonly/path.webm', receives error: 'Output directory is not writable or cannot be created'",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:17:43.037Z"
+        }
+      ],
+      "nextExampleId": 8,
+      "questions": [
+        {
+          "id": 0,
+          "text": "@human: Should we set maximum limits for width and height to prevent performance issues?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:16:09.665Z",
+          "selected": true,
+          "answer": "Yes, set maximum width to 300 and maximum height to 100 (reasonable terminal sizes)"
+        },
+        {
+          "id": 1,
+          "text": "@human: Should we validate that the output directory exists or is writable before starting recording?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:16:11.352Z",
+          "selected": true,
+          "answer": "Yes, validate that output directory exists or can be created before starting recording"
+        }
+      ],
+      "nextQuestionId": 2,
+      "estimate": 3,
+      "architectureNotes": [],
+      "nextNoteId": 0,
+      "updated": "2025-11-08T00:25:13.395Z"
+    },
+    "VID-004": {
+      "id": "VID-004",
+      "title": "Support configuration file for demo script paths and recording defaults",
+      "type": "story",
+      "status": "done",
+      "createdAt": "2025-11-08T00:13:40.407Z",
+      "updatedAt": "2025-11-08T00:51:58.284Z",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T00:37:26.551Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T00:46:42.440Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T00:49:32.470Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T00:51:22.873Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T00:51:58.284Z"
+        }
+      ],
+      "userStory": {
+        "role": "developer using fspec-videos",
+        "action": "configure default recording options in a file",
+        "benefit": "I don't have to specify the same options repeatedly on the command line"
+      },
+      "questions": [
+        {
+          "id": 0,
+          "text": "@human: What configuration file format should we use (JSON, YAML, .env)?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:37:47.512Z",
+          "selected": true,
+          "answer": "JSON format (.json file)"
+        },
+        {
+          "id": 1,
+          "text": "@human: What should the default config file name and location be?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:37:49.360Z",
+          "selected": true,
+          "answer": "fspec-videos.config.json in project root"
+        },
+        {
+          "id": 2,
+          "text": "@human: Should CLI options override config file settings?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:37:51.139Z",
+          "selected": true,
+          "answer": "Yes, CLI options override config file settings"
+        },
+        {
+          "id": 3,
+          "text": "@human: What specific options should be configurable (width, height, fps, headless, output path, script path)?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:37:52.737Z",
+          "selected": true,
+          "answer": "All recording options: width, height, fps, headless, outputPath, and demosDir"
+        }
+      ],
+      "nextQuestionId": 4,
+      "rules": [
+        {
+          "id": 0,
+          "text": "JSON format (.json file)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:41:24.204Z"
+        },
+        {
+          "id": 1,
+          "text": "fspec-videos.config.json in project root",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:42:26.166Z"
+        },
+        {
+          "id": 2,
+          "text": "Yes, CLI options override config file settings",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:42:54.381Z"
+        },
+        {
+          "id": 3,
+          "text": "All recording options: width, height, fps, headless, outputPath, and demosDir",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:19.585Z"
+        },
+        {
+          "id": 4,
+          "text": "Config file must be valid JSON format",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:30.136Z"
+        },
+        {
+          "id": 5,
+          "text": "If config file doesn't exist, use built-in defaults",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:31.902Z"
+        },
+        {
+          "id": 6,
+          "text": "Config file settings are validated using the same rules as CLI options",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:33.626Z"
+        }
+      ],
+      "nextRuleId": 7,
+      "examples": [
+        {
+          "id": 0,
+          "text": "User creates fspec-videos.config.json with default width=80, height=24, then runs record without --width/--height, recording uses 80x24",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:46.898Z"
+        },
+        {
+          "id": 1,
+          "text": "User has config file with width=100, runs record with --width=120, recording uses 120 (CLI overrides config)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:48.511Z"
+        },
+        {
+          "id": 2,
+          "text": "User has invalid JSON in config file, receives clear error message about JSON syntax",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:50.134Z"
+        },
+        {
+          "id": 3,
+          "text": "User has config with width=500 (exceeds max), receives same validation error as CLI would show",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:51.615Z"
+        },
+        {
+          "id": 4,
+          "text": "No config file exists, record command uses built-in defaults (width=120, height=30, fps=30)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:43:53.027Z"
+        }
+      ],
+      "nextExampleId": 5,
+      "estimate": 5,
+      "architectureNotes": [],
+      "nextNoteId": 0,
+      "updated": "2025-11-08T00:51:58.284Z"
+    },
+    "VID-005": {
+      "id": "VID-005",
+      "title": "Add comprehensive integration tests for recording workflow",
+      "type": "story",
+      "status": "done",
+      "createdAt": "2025-11-08T00:13:45.656Z",
+      "updatedAt": "2025-11-08T01:00:59.920Z",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T00:53:05.794Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T00:56:03.299Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T00:57:39.165Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T01:00:36.302Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T01:00:59.920Z"
+        }
+      ],
+      "questions": [
+        {
+          "id": 0,
+          "text": "@human: What specific integration scenarios should be tested? (e.g., end-to-end recording with config file, CLI override with validation, error handling across components)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:53:14.985Z",
+          "selected": true,
+          "answer": "End-to-end recording workflow (CLI → config → validation → recording), config file integration with CLI override, validation integration with merged options, error handling across component boundaries"
+        },
+        {
+          "id": 1,
+          "text": "@human: Should integration tests actually produce video files, or should they mock the recording step and verify the workflow setup?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:53:27.026Z",
+          "selected": true,
+          "answer": "Mock the actual browser recording step but verify complete workflow integration (CLI parsing, config loading, option merging, validation, recorder setup with correct parameters). Keep tests fast while testing real component integration."
+        },
+        {
+          "id": 2,
+          "text": "@human: What are the critical integration points that must be tested? (e.g., config + CLI merge, merged options + validation, validated options + recorder)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:53:41.319Z",
+          "selected": true,
+          "answer": "1) CLI options + config file = correctly merged options (precedence rules), 2) Merged options + validator = validation catches issues, 3) Validated options + recorder = recorder receives correct parameters, 4) Config errors + error handling = user sees clear error messages"
+        },
+        {
+          "id": 3,
+          "text": "@human: Should we include both success and failure scenarios in integration tests?",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:53:54.815Z",
+          "selected": true,
+          "answer": "Yes, include both. Success: complete workflow with valid options, CLI override working, defaults working. Failure: validation errors across components, config parse errors propagated correctly, error messages clear to user."
+        }
+      ],
+      "nextQuestionId": 4,
+      "rules": [
+        {
+          "id": 0,
+          "text": "Integration tests verify component integration, not individual component behavior",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:17.785Z"
+        },
+        {
+          "id": 1,
+          "text": "Integration tests mock actual browser recording to keep tests fast",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:19.676Z"
+        },
+        {
+          "id": 2,
+          "text": "Integration tests verify both success (happy path) and failure scenarios",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:21.150Z"
+        },
+        {
+          "id": 3,
+          "text": "Tests must verify CLI options + config file merge with correct precedence (CLI wins)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:22.610Z"
+        },
+        {
+          "id": 4,
+          "text": "Tests must verify validation is applied to merged options, not just CLI or config alone",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:24.210Z"
+        },
+        {
+          "id": 5,
+          "text": "Tests must verify error messages are clear and indicate the source of error (config vs validation vs recording)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:25.711Z"
+        }
+      ],
+      "nextRuleId": 6,
+      "examples": [
+        {
+          "id": 0,
+          "text": "User runs record with valid config file (width=100, height=40), recorder module receives options with width=100, height=40",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:35.951Z"
+        },
+        {
+          "id": 1,
+          "text": "User runs record with config width=100 and CLI --width=120, recorder receives width=120 (CLI override works)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:37.505Z"
+        },
+        {
+          "id": 2,
+          "text": "User runs record with config width=500 (invalid), validation error shown before recorder is called",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:38.929Z"
+        },
+        {
+          "id": 3,
+          "text": "User runs record without config file, recorder receives default values (width=120, height=30, fps=30)",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:40.468Z"
+        },
+        {
+          "id": 4,
+          "text": "User runs record with invalid JSON in config, error message shows config file path and parse error",
+          "deleted": false,
+          "createdAt": "2025-11-08T00:54:42.082Z"
+        }
+      ],
+      "nextExampleId": 5,
+      "userStory": {
+        "role": "developer maintaining fspec-videos",
+        "action": "have integration tests that verify component integration",
+        "benefit": "I can catch integration bugs and ensure components work together correctly"
+      },
+      "estimate": 5,
+      "architectureNotes": [],
+      "nextNoteId": 0,
+      "updated": "2025-11-08T01:00:59.920Z"
+    },
+    "VID-006": {
+      "id": "VID-006",
+      "title": "Document recording workflow and add example videos to repository",
+      "type": "story",
+      "status": "done",
+      "createdAt": "2025-11-08T00:13:51.629Z",
+      "updatedAt": "2025-11-08T01:36:02.810Z",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T01:01:20.255Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T01:33:55.667Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T01:35:00.538Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T01:36:00.351Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T01:36:02.810Z"
+        }
+      ],
+      "questions": [
+        {
+          "id": 0,
+          "text": "@human: What specific documentation files should be created? (README, usage guide, API docs, etc.)",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:01:36.242Z",
+          "selected": true,
+          "answer": "README.md with installation, usage, configuration, and examples. No API docs needed since it's a CLI tool."
+        },
+        {
+          "id": 1,
+          "text": "@human: Should we include example recorded videos in the repository or just document how to record them?",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:01:39.591Z",
+          "selected": true,
+          "answer": "Document how to record videos. Don't include actual video files (too large for git). Include screenshots/GIFs if useful."
+        },
+        {
+          "id": 2,
+          "text": "@human: What key sections should the README include?",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:01:42.695Z",
+          "selected": true,
+          "answer": "Installation, Quick Start, Recording Options, Configuration File, Demo Scripts, Examples, Development/Testing"
+        }
+      ],
+      "nextQuestionId": 3,
+      "rules": [
+        {
+          "id": 0,
+          "text": "README.md must exist in project root",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:01:57.656Z"
+        },
+        {
+          "id": 1,
+          "text": "README must include installation instructions (npm install)",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:01:59.150Z"
+        },
+        {
+          "id": 2,
+          "text": "README must document all CLI commands (record, list)",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:02:00.729Z"
+        },
+        {
+          "id": 3,
+          "text": "README must document configuration file format and options",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:02:02.343Z"
+        },
+        {
+          "id": 4,
+          "text": "README must include working examples that users can copy-paste",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:02:03.981Z"
+        }
+      ],
+      "nextRuleId": 5,
+      "examples": [
+        {
+          "id": 0,
+          "text": "README has Installation section with npm install command",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:02:06.023Z"
+        },
+        {
+          "id": 1,
+          "text": "README shows example: 'fspec-videos record -s src/demos/basic-usage.ts'",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:02:07.705Z"
+        },
+        {
+          "id": 2,
+          "text": "README shows config file example with width, height, fps options",
+          "deleted": false,
+          "createdAt": "2025-11-08T01:02:10.188Z"
+        }
+      ],
+      "nextExampleId": 3,
+      "userStory": {
+        "role": "developer wanting to use fspec-videos",
+        "action": "have clear documentation on how to install and use the tool",
+        "benefit": "I can quickly get started without having to read the source code"
+      },
+      "estimate": 2,
+      "architectureNotes": [],
+      "nextNoteId": 0,
+      "updated": "2025-11-08T01:36:02.810Z"
+    },
+    "VID-007": {
+      "id": "VID-007",
+      "title": "Demo scripts use incorrect @microsoft/tui-test API",
+      "type": "bug",
+      "status": "done",
+      "createdAt": "2025-11-08T01:59:20.955Z",
+      "updatedAt": "2025-11-08T02:08:27.272Z",
+      "description": "Demo scripts (basic-usage.ts, simple-test.ts) attempt to import TestController which doesn't exist. @microsoft/tui-test is a test framework - demo scripts must be written as .test.ts files using test() and expect() functions with terminal fixture.",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T01:59:32.088Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T02:02:03.687Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T02:07:41.424Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T02:07:57.280Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T02:08:27.272Z"
+        }
+      ],
+      "attachments": [
+        "spec/attachments/VID-007/tui-test-usage-guide.md"
+      ],
+      "userStory": {
+        "role": "developer using fspec.videos",
+        "action": "write demo scripts using @microsoft/tui-test correctly",
+        "benefit": "I can create working demo videos of terminal applications"
+      },
+      "rules": [
+        {
+          "id": 0,
+          "text": "Demo scripts MUST be .test.ts files using test() and expect() from @microsoft/tui-test",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:00:00.268Z"
+        },
+        {
+          "id": 1,
+          "text": "Demo scripts MUST access terminal via fixture: test('name', async ({ terminal }) => ...)",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:00:00.769Z"
+        },
+        {
+          "id": 2,
+          "text": "Demo scripts MUST use terminal.submit(), terminal.write(), terminal.key*() methods",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:00:01.272Z"
+        }
+      ],
+      "nextRuleId": 3,
+      "examples": [
+        {
+          "id": 0,
+          "text": "Shell demo: test.use({ shell: Shell.Bash }); terminal.submit('ls');",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:00:01.780Z"
+        },
+        {
+          "id": 1,
+          "text": "fspec TUI: test.use({ program: { file: 'node', args: ['fspec/dist/index.js'] } }); terminal.keyDown();",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:00:02.378Z"
+        }
+      ],
+      "nextExampleId": 2,
+      "questions": [],
+      "architectureNotes": [],
+      "nextQuestionId": 0,
+      "nextNoteId": 0,
+      "updated": "2025-11-08T02:08:27.272Z"
+    }
+  },
+  "states": {
+    "backlog": [],
+    "specifying": [],
+    "testing": [],
+    "implementing": [],
+    "validating": [],
+    "done": [
+      "VID-007",
+      "VID-006",
+      "VID-005",
+      "VID-004",
+      "VID-002",
+      "VID-003",
+      "VID-001"
+    ],
+    "blocked": []
+  },
+  "prefixCounters": {
+    "VID": 7
+  }
+}

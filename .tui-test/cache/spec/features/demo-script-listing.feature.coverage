@@ -1,0 +1,108 @@
+{
+  "scenarios": [
+    {
+      "name": "List all available demo scripts",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-script-listing.test.ts",
+          "lines": "11-29",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Demo scripts displayed in alphabetical order",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-script-listing.test.ts",
+          "lines": "32-47",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                74,
+                75,
+                76,
+                77
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Each script shows full relative path",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-script-listing.test.ts",
+          "lines": "50-62",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                79,
+                80,
+                81,
+                82
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Display usage instructions",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-script-listing.test.ts",
+          "lines": "65-79",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                84,
+                85,
+                86
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 4,
+    "coveredScenarios": 4,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/demo-script-listing.test.ts"
+    ],
+    "implFiles": [
+      "src/index.ts"
+    ],
+    "totalLinesCovered": 91
+  }
+}

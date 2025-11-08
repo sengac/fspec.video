@@ -1,0 +1,162 @@
+{
+  "categories": [
+    {
+      "name": "Phase Tags",
+      "description": "Phase identification tags",
+      "required": true,
+      "tags": []
+    },
+    {
+      "name": "Component Tags",
+      "description": "Architectural component tags",
+      "required": true,
+      "tags": [
+        {
+          "name": "@cli",
+          "description": "Command-line interface features"
+        },
+        {
+          "name": "@demos",
+          "description": "Demo script infrastructure"
+        },
+        {
+          "name": "@recorder",
+          "description": "Video recorder component"
+        }
+      ]
+    },
+    {
+      "name": "Feature Group Tags",
+      "description": "Functional area tags",
+      "required": true,
+      "tags": [
+        {
+          "name": "@feature-management",
+          "description": "Feature and specification management operations"
+        },
+        {
+          "name": "@validation",
+          "description": "Input validation features"
+        },
+        {
+          "name": "@video-recording",
+          "description": "Video recording features"
+        }
+      ]
+    },
+    {
+      "name": "Technical Tags",
+      "description": "Technical concern tags",
+      "required": false,
+      "tags": [
+        {
+          "name": "@puppeteer",
+          "description": "Puppeteer browser automation"
+        },
+        {
+          "name": "@xterm",
+          "description": "xterm.js terminal emulator"
+        }
+      ]
+    },
+    {
+      "name": "Platform Tags",
+      "description": "Platform-specific tags",
+      "required": false,
+      "tags": []
+    },
+    {
+      "name": "Priority Tags",
+      "description": "Implementation priority tags",
+      "required": false,
+      "tags": [
+        {
+          "name": "@critical",
+          "description": "Critical priority features"
+        }
+      ]
+    },
+    {
+      "name": "Status Tags",
+      "description": "Development status tags",
+      "required": false,
+      "tags": [
+        {
+          "name": "@bug",
+          "description": "Bug fixes"
+        },
+        {
+          "name": "@documentation",
+          "description": "Documentation and user-facing guides"
+        },
+        {
+          "name": "@done",
+          "description": "Feature completed and validated"
+        },
+        {
+          "name": "@wip",
+          "description": "Work in progress"
+        }
+      ]
+    },
+    {
+      "name": "Testing Tags",
+      "description": "Test-related tags",
+      "required": false,
+      "tags": [
+        {
+          "name": "@integration",
+          "description": "Integration tests that verify component integration"
+        }
+      ]
+    },
+    {
+      "name": "Automation Tags",
+      "description": "Automation integration tags",
+      "required": false,
+      "tags": []
+    }
+  ],
+  "combinationExamples": [],
+  "usageGuidelines": {
+    "requiredCombinations": {
+      "title": "",
+      "requirements": [],
+      "minimumExample": ""
+    },
+    "recommendedCombinations": {
+      "title": "",
+      "includes": [],
+      "recommendedExample": ""
+    },
+    "orderingConvention": {
+      "title": "",
+      "order": [],
+      "example": ""
+    }
+  },
+  "addingNewTags": {
+    "process": [],
+    "namingConventions": [],
+    "antiPatterns": {
+      "dont": [],
+      "do": []
+    }
+  },
+  "queries": {
+    "title": "",
+    "examples": []
+  },
+  "statistics": {
+    "lastUpdated": "2025-11-08T03:19:57.728Z",
+    "phaseStats": [],
+    "componentStats": [],
+    "featureGroupStats": [],
+    "updateCommand": "fspec tag-stats"
+  },
+  "validation": {
+    "rules": [],
+    "commands": []
+  },
+  "references": []
+}

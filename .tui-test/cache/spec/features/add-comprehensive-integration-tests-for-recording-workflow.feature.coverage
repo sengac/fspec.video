@@ -1,0 +1,196 @@
+{
+  "scenarios": [
+    {
+      "name": "Integration test with valid config file",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-workflow-integration.test.ts",
+          "lines": "37-61",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Integration test with CLI override",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-workflow-integration.test.ts",
+          "lines": "64-88",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Integration test with invalid config value",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-workflow-integration.test.ts",
+          "lines": "91-110",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Integration test without config file",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-workflow-integration.test.ts",
+          "lines": "113-135",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Integration test with invalid JSON in config",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-workflow-integration.test.ts",
+          "lines": "138-154",
+          "implMappings": [
+            {
+              "file": "src/index.ts",
+              "lines": [
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 5,
+    "coveredScenarios": 5,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/recording-workflow-integration.test.ts"
+    ],
+    "implFiles": [
+      "src/index.ts"
+    ],
+    "totalLinesCovered": 210
+  }
+}

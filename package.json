@@ -1,0 +1,59 @@
+{
+  "name": "@sengac/fspec-videos",
+  "version": "0.1.0",
+  "description": "Demo video recorder for fspec TUI using @microsoft/tui-test",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "fspec-videos": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "vite build && chmod +x dist/index.js",
+    "dev": "vite build --watch",
+    "record": "vite-node src/index.ts",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "format": "prettier --write 'src/**/*.ts'",
+    "test": "vitest run",
+    "test:watch": "vitest --watch"
+  },
+  "keywords": [
+    "fspec",
+    "tui",
+    "demo",
+    "video",
+    "recording",
+    "terminal",
+    "xterm"
+  ],
+  "author": "rquast@sengac.com",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@microsoft/tui-test": "^0.0.1-rc.2",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/addon-webgl": "^0.18.0",
+    "@xterm/xterm": "^5.5.0",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.1",
+    "express": "^5.1.0",
+    "puppeteer": "^23.10.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.5.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vite-node": "^2.1.8",
+    "vitest": "^4.0.1"
+  }
+}

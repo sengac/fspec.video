@@ -1,0 +1,44 @@
+{
+  "scenarios": [
+    {
+      "name": "Demo script stdout captured and displayed in browser terminal",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-stdout-capture.test.ts",
+          "lines": "12-60",
+          "implMappings": []
+        }
+      ]
+    },
+    {
+      "name": "Multiple lines with delays captured sequentially",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-stdout-capture.test.ts",
+          "lines": "63-108",
+          "implMappings": []
+        }
+      ]
+    },
+    {
+      "name": "Current broken behavior - blank screen with only prompt",
+      "testMappings": [
+        {
+          "file": "src/__tests__/demo-stdout-capture.test.ts",
+          "lines": "110-134",
+          "implMappings": []
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 3,
+    "coveredScenarios": 3,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/demo-stdout-capture.test.ts"
+    ],
+    "implFiles": [],
+    "totalLinesCovered": 120
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "scenarios": [
+    {
+      "name": "Reject negative terminal width",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "10-31",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                17,
+                18,
+                19,
+                20,
+                21,
+                22
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reject zero terminal height",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "33-54",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reject FPS above maximum",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "56-77",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                36,
+                37,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reject non-existent script file",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "79-100",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Accept valid recording options",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "102-125",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reject terminal width above maximum",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "127-148",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                23,
+                24,
+                25
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reject terminal height above maximum",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "150-171",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                34
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reject invalid output directory",
+      "testMappings": [
+        {
+          "file": "src/__tests__/recording-option-validation.test.ts",
+          "lines": "173-194",
+          "implMappings": [
+            {
+              "file": "src/validator.ts",
+              "lines": [
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 8,
+    "coveredScenarios": 8,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/recording-option-validation.test.ts"
+    ],
+    "implFiles": [
+      "src/validator.ts"
+    ],
+    "totalLinesCovered": 266
+  }
+}
