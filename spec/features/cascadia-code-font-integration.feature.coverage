@@ -1,0 +1,72 @@
+{
+  "scenarios": [
+    {
+      "name": "Install Cascadia Code font as project dependency",
+      "testMappings": [
+        {
+          "file": "src/__tests__/cascadia-code-font-integration.test.ts",
+          "lines": "12-31",
+          "implMappings": [
+            {
+              "file": "package.json",
+              "lines": [
+                35
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Configure Express server to serve font files",
+      "testMappings": [
+        {
+          "file": "src/__tests__/cascadia-code-font-integration.test.ts",
+          "lines": "33-50",
+          "implMappings": [
+            {
+              "file": "src/server.ts",
+              "lines": [
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Configure xterm.js to use Cascadia Code font",
+      "testMappings": [
+        {
+          "file": "src/__tests__/cascadia-code-font-integration.test.ts",
+          "lines": "52-69",
+          "implMappings": [
+            {
+              "file": "src/server.ts",
+              "lines": [
+                109
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 3,
+    "coveredScenarios": 3,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/cascadia-code-font-integration.test.ts"
+    ],
+    "implFiles": [
+      "package.json",
+      "src/server.ts"
+    ],
+    "totalLinesCovered": 63
+  }
+}

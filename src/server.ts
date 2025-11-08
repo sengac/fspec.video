@@ -1,6 +1,11 @@
 import express, { Express } from 'express';
 import { Server } from 'http';
 import { AddressInfo } from 'net';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export interface ServerInfo {
   url: string;
@@ -9,6 +14,9 @@ export interface ServerInfo {
 
 export async function startServer(): Promise<ServerInfo> {
   const app: Express = express();
+
+  // Serve Cascadia Code font files from node_modules
+  app.use('/fonts', express.static(join(__dirname, '../node_modules/@fontsource/cascadia-code/files')));
 
   // Serve the terminal HTML page
   app.get('/', (_req, res) => {
@@ -46,6 +54,14 @@ function getTerminalHTML(): string {
   <title>fspec Terminal Recording</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css" />
   <style>
+    @font-face {
+      font-family: 'Cascadia Code';
+      src: url('/fonts/cascadia-code-latin-400-normal.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -56,7 +72,7 @@ function getTerminalHTML(): string {
       height: 100%;
       background-color: #1e1e1e;
       overflow: hidden;
-      font-family: 'Courier New', monospace;
+      font-family: 'Cascadia Code', 'Courier New', monospace;
     }
     #terminal-container {
       width: 100%;

@@ -2,7 +2,7 @@
   "version": "0.7.1",
   "meta": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-08T04:24:08.897Z"
+    "lastUpdated": "2025-11-08T05:55:12.302Z"
   },
   "workUnits": {
     "VID-001": {
@@ -1094,6 +1094,119 @@
         }
       ],
       "nextExampleId": 5
+    },
+    "VID-012": {
+      "id": "VID-012",
+      "title": "Cascadia Code Font Integration",
+      "type": "story",
+      "status": "done",
+      "createdAt": "2025-11-08T05:35:59.354Z",
+      "updatedAt": "2025-11-08T05:55:12.307Z",
+      "description": "Install Cascadia Code font as a dependency and configure xterm.js/tui-test to use it instead of default courier font",
+      "children": [],
+      "userStory": {
+        "role": "developer using fspec videos",
+        "action": "see terminal output rendered in Cascadia Code font",
+        "benefit": "I get better readability and a modern monospace font appearance"
+      },
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T05:36:30.253Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T05:51:25.427Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T05:54:18.263Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T05:54:40.393Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T05:55:12.307Z"
+        }
+      ],
+      "rules": [
+        {
+          "id": 0,
+          "text": "Cascadia Code font files must be bundled with the project as a dependency",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:36:33.341Z"
+        },
+        {
+          "id": 1,
+          "text": "Font must be loaded via CSS @font-face in the terminal HTML",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:36:38.417Z"
+        },
+        {
+          "id": 2,
+          "text": "Cascadia Code should be the first font in the xterm.js fontFamily setting",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:36:43.166Z"
+        }
+      ],
+      "nextRuleId": 3,
+      "examples": [
+        {
+          "id": 0,
+          "text": "When page loads, browser downloads Cascadia Code font files from local project assets",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:36:47.533Z"
+        },
+        {
+          "id": 1,
+          "text": "When xterm.js renders text, it uses Cascadia Code font instead of Courier New",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:36:52.136Z"
+        },
+        {
+          "id": 2,
+          "text": "When checking package.json, @fontsource/cascadia-code is listed as a dependency",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:36:57.208Z"
+        }
+      ],
+      "nextExampleId": 3,
+      "questions": [
+        {
+          "id": 0,
+          "text": "@human: Do you want any specific font weight/variant of Cascadia Code (e.g., regular, bold, light) or just the default?",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:37:02.754Z",
+          "selected": true,
+          "answer": "Regular weight only, no special variants needed"
+        }
+      ],
+      "nextQuestionId": 1,
+      "architectureNotes": [
+        {
+          "id": 0,
+          "text": "Uses @fontsource/cascadia-code npm package for font delivery",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:50:05.151Z"
+        },
+        {
+          "id": 1,
+          "text": "Font loaded via CSS @font-face in server.ts getTerminalHTML() function",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:50:10.375Z"
+        },
+        {
+          "id": 2,
+          "text": "Express server serves font files from node_modules/@fontsource/cascadia-code",
+          "deleted": false,
+          "createdAt": "2025-11-08T05:50:15.383Z"
+        }
+      ],
+      "nextNoteId": 3,
+      "estimate": 2,
+      "updated": "2025-11-08T05:55:12.307Z"
     }
   },
   "states": {
@@ -1105,6 +1218,7 @@
     ],
     "validating": [],
     "done": [
+      "VID-012",
       "VID-010",
       "VID-009",
       "VID-007",
@@ -1118,6 +1232,6 @@
     "blocked": []
   },
   "prefixCounters": {
-    "VID": 11
+    "VID": 12
   }
 }
