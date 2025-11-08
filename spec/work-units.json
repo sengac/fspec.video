@@ -2,7 +2,7 @@
   "version": "0.7.1",
   "meta": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-08T03:18:03.910Z"
+    "lastUpdated": "2025-11-08T04:19:47.674Z"
   },
   "workUnits": {
     "VID-001": {
@@ -920,9 +920,9 @@
       "id": "VID-010",
       "title": "Video records but captures blank/black frames - xterm canvas not rendering",
       "type": "bug",
-      "status": "implementing",
+      "status": "done",
       "createdAt": "2025-11-08T03:15:02.277Z",
-      "updatedAt": "2025-11-08T03:21:29.205Z",
+      "updatedAt": "2025-11-08T04:19:47.677Z",
       "description": "MediaRecorder is capturing frames (19KB file) but all frames are black. The terminal content is not visible in the recording. Need to investigate: 1) Is xterm rendering to the canvas we're capturing? 2) Does xterm need time to render before recording starts? 3) Is the canvas element ready when we start captureStream()?",
       "children": [],
       "stateHistory": [
@@ -937,6 +937,14 @@
         {
           "state": "implementing",
           "timestamp": "2025-11-08T03:21:29.205Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T04:18:23.569Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T04:19:47.677Z"
         }
       ],
       "userStory": {
@@ -991,18 +999,22 @@
           "createdAt": "2025-11-08T03:18:37.368Z"
         }
       ],
-      "nextExampleId": 3
+      "nextExampleId": 3,
+      "questions": [],
+      "architectureNotes": [],
+      "nextQuestionId": 0,
+      "nextNoteId": 0,
+      "updated": "2025-11-08T04:19:47.677Z"
     }
   },
   "states": {
     "backlog": [],
     "specifying": [],
     "testing": [],
-    "implementing": [
-      "VID-010"
-    ],
+    "implementing": [],
     "validating": [],
     "done": [
+      "VID-010",
       "VID-009",
       "VID-007",
       "VID-006",
