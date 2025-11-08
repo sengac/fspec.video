@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Font 64px Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #fff;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    video {
+      border: 2px solid #444;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      max-width: 90%;
+    }
+    .info {
+      margin-top: 20px;
+      padding: 15px;
+      background: #2a2a2a;
+      border-radius: 5px;
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 Font 64px Test</h1>
+  <video controls autoplay loop id="video">
+    <source src="FONT-64.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  <div class="info">
+    <p><strong>File:</strong> FONT-64.webm</p>
+    <p><strong>Font Size:</strong> 64px</p>
+    <p><strong>Viewport:</strong> 4608px × 2976px (120 cols × 38.4, 30 rows × 99.2)</p>
+    <p><strong>Expected:</strong> LARGE readable text!</p>
+  </div>
+  <script>
+    // Auto-seek to halfway for debugging
+    const video = document.getElementById('video');
+    video.addEventListener('loadedmetadata', () => {
+      setTimeout(() => {
+        video.currentTime = video.duration / 2;
+        video.pause();
+      }, 500);
+    });
+  </script>
+</body>
+</html>

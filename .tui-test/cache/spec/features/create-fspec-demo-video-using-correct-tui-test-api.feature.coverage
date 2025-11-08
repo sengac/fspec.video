@@ -1,0 +1,34 @@
+{
+  "scenarios": [
+    {
+      "name": "Demo script uses correct tui-test API",
+      "testMappings": [
+        {
+          "file": "src/__tests__/fspec-demo-tui-test-api.test.ts",
+          "lines": "8-24",
+          "implMappings": []
+        }
+      ]
+    },
+    {
+      "name": "Record fspec demo video with readable 4K output",
+      "testMappings": [
+        {
+          "file": "src/__tests__/fspec-demo-tui-test-api.test.ts",
+          "lines": "27-47",
+          "implMappings": []
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalScenarios": 2,
+    "coveredScenarios": 2,
+    "coveragePercent": 100,
+    "testFiles": [
+      "src/__tests__/fspec-demo-tui-test-api.test.ts"
+    ],
+    "implFiles": [],
+    "totalLinesCovered": 38
+  }
+}

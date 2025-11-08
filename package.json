@@ -32,6 +32,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@homebridge/node-pty-prebuilt-multiarch": "^0.13.1",
     "@microsoft/tui-test": "^0.0.1-rc.2",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/addon-webgl": "^0.18.0",

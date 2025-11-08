@@ -37,6 +37,7 @@ Technical concern tags
 | Tag | Description |
 |-----|-------------|
 | `@puppeteer` | Puppeteer browser automation |
+| `@tui-test` | Features using @microsoft/tui-test framework for terminal automation |
 | `@xterm` | xterm.js terminal emulator |
 
 ### Platform Tags
@@ -88,7 +89,7 @@ Automation integration tags
 
 ## Tag Statistics
 
-_Last updated: 2025-11-08T03:19:57.728Z_
+_Last updated: 2025-11-08T04:26:14.343Z_
 
 **Update Command**: `fspec tag-stats`
 

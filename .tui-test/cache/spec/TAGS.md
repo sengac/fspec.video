@@ -18,6 +18,7 @@ Architectural component tags
 |-----|-------------|
 | `@cli` | Command-line interface features |
 | `@demos` | Demo script infrastructure |
+| `@recorder` | Video recorder component |
 
 ### Feature Group Tags (Required)
 
@@ -32,6 +33,12 @@ Functional area tags
 ### Technical Tags
 
 Technical concern tags
+
+| Tag | Description |
+|-----|-------------|
+| `@puppeteer` | Puppeteer browser automation |
+| `@tui-test` | Features using @microsoft/tui-test framework for terminal automation |
+| `@xterm` | xterm.js terminal emulator |
 
 ### Platform Tags
 
@@ -82,7 +89,7 @@ Automation integration tags
 
 ## Tag Statistics
 
-_Last updated: 2025-11-08T02:01:53.082Z_
+_Last updated: 2025-11-08T04:26:14.343Z_
 
 **Update Command**: `fspec tag-stats`
 

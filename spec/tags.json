@@ -54,6 +54,10 @@
           "description": "Puppeteer browser automation"
         },
         {
+          "name": "@tui-test",
+          "description": "Features using @microsoft/tui-test framework for terminal automation"
+        },
+        {
           "name": "@xterm",
           "description": "xterm.js terminal emulator"
         }
@@ -148,7 +152,7 @@
     "examples": []
   },
   "statistics": {
-    "lastUpdated": "2025-11-08T03:19:57.728Z",
+    "lastUpdated": "2025-11-08T04:26:14.343Z",
     "phaseStats": [],
     "componentStats": [],
     "featureGroupStats": [],

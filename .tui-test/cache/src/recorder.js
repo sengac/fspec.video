@@ -1,4 +1,4 @@
-//# hash=5009123df84212522d28c8686b3256df
+//# hash=3bb4829236d4e9dd93ae05c305617ea7
 //# sourceMappingURL=recorder.js.map
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -81,6 +81,10 @@ function _object_spread_props(target, source) {
         });
     }
     return target;
+}
+function _type_of(obj) {
+    "@swc/helpers - typeof";
+    return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
 }
 function _ts_generator(thisArg, body) {
     var f, y, t, _ = {
@@ -175,12 +179,12 @@ function _ts_generator(thisArg, body) {
 }
 import puppeteer from 'puppeteer';
 import { spawn } from 'child_process';
-import { writeFile, mkdir } from 'fs/promises';
+import { mkdir } from 'fs/promises';
 import { dirname } from 'path';
 import { startServer } from './server.js';
 export function startRecording(options) {
     return _async_to_generator(function() {
-        var browser, serverCleanup, _ref, url, cleanup, page, recordingData, videoBuffer;
+        var browser, serverCleanup, _ref, url, cleanup, page, recorder;
         return _ts_generator(this, function(_state) {
             switch(_state.label){
                 case 0:
@@ -191,8 +195,8 @@ export function startRecording(options) {
                     _state.trys.push([
                         1,
                         ,
-                        12,
-                        17
+                        14,
+                        19
                     ]);
                     // Ensure output directory exists
                     return [
@@ -226,8 +230,9 @@ export function startRecording(options) {
                                 '--allow-file-access-from-files'
                             ],
                             defaultViewport: {
-                                width: options.width * 10,
-                                height: options.height * 20
+                                // 4K resolution for high quality recording
+                                width: 3840,
+                                height: 2160
                             }
                         })
                     ];
@@ -239,6 +244,16 @@ export function startRecording(options) {
                     ];
                 case 5:
                     page = _state.sent();
+                    // Listen to browser console for debugging
+                    page.on('console', function(msg) {
+                        var type = msg.type();
+                        var text = msg.text();
+                        if (type === 'error') {
+                            console.error("\uD83C\uDF10 Browser console.error: ".concat(text));
+                        } else {
+                            console.log("\uD83C\uDF10 Browser console.".concat(type, ": ").concat(text));
+                        }
+                    });
                     // Navigate to the terminal page
                     console.log('Loading terminal interface...');
                     return [
@@ -258,165 +273,95 @@ export function startRecording(options) {
                     ];
                 case 7:
                     _state.sent();
-                    // Start recording
+                    // Wait for canvas element to be created by xterm.js
+                    return [
+                        4,
+                        page.waitForSelector('canvas', {
+                            timeout: 10000
+                        })
+                    ];
+                case 8:
+                    _state.sent();
+                    // Wait a bit more to ensure xterm has done its initial render
+                    return [
+                        4,
+                        new Promise(function(resolve) {
+                            return setTimeout(resolve, 500);
+                        })
+                    ];
+                case 9:
+                    _state.sent();
+                    // Start recording using Puppeteer's built-in screencast
                     console.log('Starting video capture...');
                     return [
                         4,
-                        startBrowserRecording(page, options)
+                        page.screencast({
+                            path: options.outputPath,
+                            ffmpegPath: 'ffmpeg'
+                        })
                     ];
-                case 8:
-                    recordingData = _state.sent();
+                case 10:
+                    recorder = _state.sent();
                     // Run the demo script
                     console.log('Executing demo script...');
                     return [
                         4,
                         runDemoScript(page, options.scriptPath)
                     ];
-                case 9:
+                case 11:
+                    _state.sent();
+                    // Wait a bit to ensure last frames are captured
+                    return [
+                        4,
+                        new Promise(function(resolve) {
+                            return setTimeout(resolve, 500);
+                        })
+                    ];
+                case 12:
                     _state.sent();
                     // Stop recording
                     console.log('Stopping video capture...');
                     return [
                         4,
-                        stopBrowserRecording(page, recordingData)
-                    ];
-                case 10:
-                    videoBuffer = _state.sent();
-                    // Save the video
-                    console.log('Saving video...');
-                    return [
-                        4,
-                        writeFile(options.outputPath, videoBuffer)
-                    ];
-                case 11:
-                    _state.sent();
-                    return [
-                        3,
-                        17
-                    ];
-                case 12:
-                    if (!browser) return [
-                        3,
-                        14
-                    ];
-                    return [
-                        4,
-                        browser.close()
+                        recorder.stop()
                     ];
                 case 13:
                     _state.sent();
-                    _state.label = 14;
+                    return [
+                        3,
+                        19
+                    ];
                 case 14:
-                    if (!serverCleanup) return [
+                    if (!browser) return [
                         3,
                         16
                     ];
                     return [
                         4,
-                        serverCleanup()
+                        browser.close()
                     ];
                 case 15:
                     _state.sent();
                     _state.label = 16;
                 case 16:
+                    if (!serverCleanup) return [
+                        3,
+                        18
+                    ];
+                    return [
+                        4,
+                        serverCleanup()
+                    ];
+                case 17:
+                    _state.sent();
+                    _state.label = 18;
+                case 18:
                     return [
                         7
                     ];
-                case 17:
+                case 19:
                     return [
                         2
-                    ];
-            }
-        });
-    })();
-}
-function startBrowserRecording(page, options) {
-    return _async_to_generator(function() {
-        var recordingId;
-        return _ts_generator(this, function(_state) {
-            switch(_state.label){
-                case 0:
-                    return [
-                        4,
-                        page.evaluate(function(fps) {
-                            /* eslint-disable no-undef */ return new Promise(function(resolve, reject) {
-                                var canvas = document.querySelector('canvas');
-                                if (!canvas) {
-                                    reject(new Error('Canvas element not found'));
-                                    return;
-                                }
-                                // @ts-expect-error - captureStream is available on canvas
-                                var stream = canvas.captureStream(fps);
-                                var mediaRecorder = new MediaRecorder(stream, {
-                                    mimeType: 'video/webm;codecs=vp9',
-                                    videoBitsPerSecond: 2500000
-                                });
-                                var chunks = [];
-                                mediaRecorder.ondataavailable = function(event) {
-                                    if (event.data.size > 0) {
-                                        chunks.push(event.data);
-                                    }
-                                };
-                                // Store in window for later access
-                                // @ts-expect-error - custom property
-                                window.__recordingData = {
-                                    mediaRecorder: mediaRecorder,
-                                    chunks: chunks
-                                };
-                                mediaRecorder.start();
-                                resolve('recording-started');
-                            });
-                        /* eslint-enable no-undef */ }, options.fps)
-                    ];
-                case 1:
-                    recordingId = _state.sent();
-                    return [
-                        2,
-                        {
-                            recordingId: recordingId
-                        }
-                    ];
-            }
-        });
-    })();
-}
-function stopBrowserRecording(page, _recordingData) {
-    return _async_to_generator(function() {
-        var base64Video;
-        return _ts_generator(this, function(_state) {
-            switch(_state.label){
-                case 0:
-                    return [
-                        4,
-                        page.evaluate(function() {
-                            /* eslint-disable no-undef */ return new Promise(function(resolve, reject) {
-                                // @ts-expect-error - custom property
-                                var _window___recordingData = window.__recordingData, mediaRecorder = _window___recordingData.mediaRecorder, chunks = _window___recordingData.chunks;
-                                if (!mediaRecorder) {
-                                    reject(new Error('No active recording found'));
-                                    return;
-                                }
-                                mediaRecorder.onstop = function() {
-                                    var blob = new Blob(chunks, {
-                                        type: 'video/webm'
-                                    });
-                                    var reader = new FileReader();
-                                    reader.onloadend = function() {
-                                        var base64 = reader.result.split(',')[1];
-                                        resolve(base64);
-                                    };
-                                    reader.onerror = reject;
-                                    reader.readAsDataURL(blob);
-                                };
-                                mediaRecorder.stop();
-                            });
-                        /* eslint-enable no-undef */ })
-                    ];
-                case 1:
-                    base64Video = _state.sent();
-                    return [
-                        2,
-                        Buffer.from(base64Video, 'base64')
                     ];
             }
         });
@@ -425,44 +370,94 @@ function stopBrowserRecording(page, _recordingData) {
 function runDemoScript(page, scriptPath) {
     return _async_to_generator(function() {
         return _ts_generator(this, function(_state) {
-            switch(_state.label){
-                case 0:
-                    // Execute the demo script using @microsoft/tui-test
-                    // The script will interact with the terminal through the page
-                    return [
-                        4,
-                        page.evaluate(function(script) {
-                            console.log('Running demo script:', script);
-                        // The actual script execution will be handled by the imported script
-                        }, scriptPath)
-                    ];
-                case 1:
-                    _state.sent();
-                    // For now, spawn the demo script as a separate process
-                    // and let it communicate with the page through the exposed functions
-                    return [
-                        2,
-                        new Promise(function(resolve, reject) {
-                            var child = spawn('node', [
-                                '--loader',
-                                'tsx',
-                                scriptPath
-                            ], {
-                                env: _object_spread_props(_object_spread({}, process.env), {
-                                    FSPEC_DEMO_MODE: 'true'
-                                })
-                            });
-                            child.on('close', function(code) {
-                                if (code === 0) {
-                                    resolve();
-                                } else {
-                                    reject(new Error("Demo script exited with code ".concat(code)));
+            // Spawn the demo script as a separate process
+            // Capture stdout and send to browser terminal via window.writeToTerminal()
+            return [
+                2,
+                new Promise(function(resolve, reject) {
+                    var child = spawn('npx', [
+                        'tsx',
+                        scriptPath
+                    ], {
+                        env: _object_spread_props(_object_spread({}, process.env), {
+                            FSPEC_DEMO_MODE: 'true'
+                        })
+                    });
+                    // Capture stdout and send each chunk to browser terminal
+                    child.stdout.on('data', function(data) {
+                        return _async_to_generator(function() {
+                            var text, error;
+                            return _ts_generator(this, function(_state) {
+                                switch(_state.label){
+                                    case 0:
+                                        text = data.toString();
+                                        console.log('📝 Captured stdout:', JSON.stringify(text));
+                                        _state.label = 1;
+                                    case 1:
+                                        _state.trys.push([
+                                            1,
+                                            3,
+                                            ,
+                                            4
+                                        ]);
+                                        return [
+                                            4,
+                                            page.evaluate(function(t) {
+                                                console.log('🌐 Browser received:', JSON.stringify(t));
+                                                // @ts-expect-error - window.writeToTerminal is exposed by server.ts
+                                                if (typeof window.writeToTerminal === 'function') {
+                                                    // @ts-expect-error - window.writeToTerminal is exposed by server.ts
+                                                    window.writeToTerminal(t);
+                                                    console.log('✅ Written to terminal');
+                                                } else {
+                                                    console.error('❌ window.writeToTerminal is not a function:', _type_of(window.writeToTerminal));
+                                                }
+                                            }, text)
+                                        ];
+                                    case 2:
+                                        _state.sent();
+                                        return [
+                                            3,
+                                            4
+                                        ];
+                                    case 3:
+                                        error = _state.sent();
+                                        console.error('❌ Error sending to browser:', error);
+                                        return [
+                                            3,
+                                            4
+                                        ];
+                                    case 4:
+                                        return [
+                                            2
+                                        ];
                                 }
                             });
-                            child.on('error', reject);
-                        })
-                    ];
-            }
+                        })();
+                    });
+                    // Also capture stderr for debugging
+                    child.stderr.on('data', function(data) {
+                        return _async_to_generator(function() {
+                            var text;
+                            return _ts_generator(this, function(_state) {
+                                text = data.toString();
+                                console.error('Demo script stderr:', text);
+                                return [
+                                    2
+                                ];
+                            });
+                        })();
+                    });
+                    child.on('close', function(code) {
+                        if (code === 0) {
+                            resolve();
+                        } else {
+                            reject(new Error("Demo script exited with code ".concat(code)));
+                        }
+                    });
+                    child.on('error', reject);
+                })
+            ];
         });
     })();
 }

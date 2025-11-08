@@ -18,6 +18,10 @@
         {
           "name": "@demos",
           "description": "Demo script infrastructure"
+        },
+        {
+          "name": "@recorder",
+          "description": "Video recorder component"
         }
       ]
     },
@@ -44,7 +48,20 @@
       "name": "Technical Tags",
       "description": "Technical concern tags",
       "required": false,
-      "tags": []
+      "tags": [
+        {
+          "name": "@puppeteer",
+          "description": "Puppeteer browser automation"
+        },
+        {
+          "name": "@tui-test",
+          "description": "Features using @microsoft/tui-test framework for terminal automation"
+        },
+        {
+          "name": "@xterm",
+          "description": "xterm.js terminal emulator"
+        }
+      ]
     },
     {
       "name": "Platform Tags",
@@ -135,7 +152,7 @@
     "examples": []
   },
   "statistics": {
-    "lastUpdated": "2025-11-08T02:01:53.082Z",
+    "lastUpdated": "2025-11-08T04:26:14.343Z",
     "phaseStats": [],
     "componentStats": [],
     "featureGroupStats": [],

@@ -2,7 +2,7 @@
   "version": "0.7.1",
   "meta": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-08T04:19:47.674Z"
+    "lastUpdated": "2025-11-08T04:24:08.897Z"
   },
   "workUnits": {
     "VID-001": {
@@ -1005,13 +1005,104 @@
       "nextQuestionId": 0,
       "nextNoteId": 0,
       "updated": "2025-11-08T04:19:47.677Z"
+    },
+    "VID-011": {
+      "id": "VID-011",
+      "title": "Create fspec demo video using correct tui-test API",
+      "type": "story",
+      "status": "implementing",
+      "createdAt": "2025-11-08T04:23:53.396Z",
+      "updatedAt": "2025-11-08T04:32:28.049Z",
+      "description": "Use @microsoft/tui-test framework correctly to create a demo video showing fspec TUI navigation and features. Demo must be a .test.ts file using test() and terminal fixture, not standalone script.",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T04:23:59.669Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T04:31:11.376Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T04:32:28.049Z"
+        }
+      ],
+      "userStory": {
+        "role": "developer wanting to understand fspec",
+        "action": "watch a demo video of fspec TUI in action",
+        "benefit": "I can see how to navigate and use fspec effectively"
+      },
+      "rules": [
+        {
+          "id": 0,
+          "text": "Demo script MUST be a .test.ts file using @microsoft/tui-test framework",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:19.404Z"
+        },
+        {
+          "id": 1,
+          "text": "Demo MUST use test() function and terminal fixture, not TestController",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:20.154Z"
+        },
+        {
+          "id": 2,
+          "text": "Demo MUST use test.use() to configure fspec TUI as the program",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:20.904Z"
+        },
+        {
+          "id": 3,
+          "text": "Recording MUST produce readable 4K video with fontSize 96px",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:21.645Z"
+        }
+      ],
+      "nextRuleId": 4,
+      "examples": [
+        {
+          "id": 0,
+          "text": "Demo shows fspec TUI loading with work units visible",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:32.319Z"
+        },
+        {
+          "id": 1,
+          "text": "Demo navigates through work units using arrow keys (terminal.keyDown/keyUp)",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:33.096Z"
+        },
+        {
+          "id": 2,
+          "text": "Demo opens a work unit with Enter key (terminal.submit)",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:33.868Z"
+        },
+        {
+          "id": 3,
+          "text": "Demo shows work unit details and navigates back with ESC (terminal.keyEscape)",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:34.639Z"
+        },
+        {
+          "id": 4,
+          "text": "Recording produces FINAL-FSPEC-DEMO.webm in 4K with visible text",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:35.391Z"
+        }
+      ],
+      "nextExampleId": 5
     }
   },
   "states": {
     "backlog": [],
     "specifying": [],
     "testing": [],
-    "implementing": [],
+    "implementing": [
+      "VID-011"
+    ],
     "validating": [],
     "done": [
       "VID-010",
@@ -1027,6 +1118,6 @@
     "blocked": []
   },
   "prefixCounters": {
-    "VID": 10
+    "VID": 11
   }
 }

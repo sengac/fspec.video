@@ -2,7 +2,7 @@
   "version": "0.7.1",
   "meta": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-08T02:08:27.266Z"
+    "lastUpdated": "2025-11-08T04:24:08.897Z"
   },
   "workUnits": {
     "VID-001": {
@@ -801,15 +801,312 @@
       "nextQuestionId": 0,
       "nextNoteId": 0,
       "updated": "2025-11-08T02:08:27.272Z"
+    },
+    "VID-009": {
+      "id": "VID-009",
+      "title": "MediaRecorder produces empty video files - canvas not capturing",
+      "type": "bug",
+      "status": "done",
+      "createdAt": "2025-11-08T02:54:54.689Z",
+      "updatedAt": "2025-11-08T03:09:14.188Z",
+      "description": "Recording pipeline works end-to-end (server starts, browser launches, demo executes, recording completes) but MediaRecorder produces 0-byte .webm files. The canvas.captureStream() or MediaRecorder is not capturing frames. Need to research MediaRecorder API, browser permissions, Playwright configuration, and related dependencies.",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T02:55:02.909Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T03:04:24.618Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T03:05:11.222Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T03:09:12.968Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T03:09:14.188Z"
+        }
+      ],
+      "rules": [
+        {
+          "id": 0,
+          "text": "Canvas captureStream() only captures frames when canvas is actively being painted",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:56:50.044Z"
+        },
+        {
+          "id": 1,
+          "text": "MediaRecorder produces empty video files if no frames are painted to canvas after recording starts",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:56:51.559Z"
+        },
+        {
+          "id": 2,
+          "text": "xterm.js uses differential rendering - only redraws canvas when terminal content changes",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:57:04.019Z"
+        },
+        {
+          "id": 3,
+          "text": "Static terminal content means no canvas repaints means MediaRecorder gets zero frames",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:57:05.592Z"
+        },
+        {
+          "id": 4,
+          "text": "MediaRecorder needs continuous canvas repaints to capture frames",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:57:39.092Z"
+        },
+        {
+          "id": 5,
+          "text": "Solution requires requestAnimationFrame loop to force canvas redraws at recording FPS",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:57:40.665Z"
+        },
+        {
+          "id": 6,
+          "text": "Animation loop must run at same FPS as MediaRecorder to ensure frame capture",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:58:00.004Z"
+        }
+      ],
+      "nextRuleId": 7,
+      "examples": [
+        {
+          "id": 0,
+          "text": "Demo script writes to terminal once then exits - video file is 0 bytes",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:57:07.010Z"
+        },
+        {
+          "id": 1,
+          "text": "Use requestAnimationFrame to redraw canvas every frame (e.g. 30 FPS) even when terminal content unchanged",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:57:42.224Z"
+        },
+        {
+          "id": 2,
+          "text": "Current code starts MediaRecorder but has no animation loop to force canvas redraws",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:57:58.462Z"
+        },
+        {
+          "id": 3,
+          "text": "Add requestAnimationFrame loop that calls canvas.getContext('2d').getImageData() to force repaint",
+          "deleted": false,
+          "createdAt": "2025-11-08T02:58:13.179Z"
+        }
+      ],
+      "nextExampleId": 4,
+      "userStory": {
+        "role": "developer using fspec.videos",
+        "action": "record terminal demo videos that capture all frames",
+        "benefit": "I can create working demo videos without empty files"
+      },
+      "questions": [],
+      "architectureNotes": [],
+      "nextQuestionId": 0,
+      "nextNoteId": 0,
+      "updated": "2025-11-08T03:09:14.188Z"
+    },
+    "VID-010": {
+      "id": "VID-010",
+      "title": "Video records but captures blank/black frames - xterm canvas not rendering",
+      "type": "bug",
+      "status": "done",
+      "createdAt": "2025-11-08T03:15:02.277Z",
+      "updatedAt": "2025-11-08T04:19:47.677Z",
+      "description": "MediaRecorder is capturing frames (19KB file) but all frames are black. The terminal content is not visible in the recording. Need to investigate: 1) Is xterm rendering to the canvas we're capturing? 2) Does xterm need time to render before recording starts? 3) Is the canvas element ready when we start captureStream()?",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T03:17:52.357Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T03:20:09.643Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T03:21:29.205Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T04:18:23.569Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T04:19:47.677Z"
+        }
+      ],
+      "userStory": {
+        "role": "developer using fspec.videos",
+        "action": "record terminal demo videos that show actual terminal output",
+        "benefit": "I can create working demo videos with visible content instead of blank screens"
+      },
+      "rules": [
+        {
+          "id": 0,
+          "text": "Demo script stdout must be captured and sent to browser terminal",
+          "deleted": false,
+          "createdAt": "2025-11-08T03:18:09.431Z"
+        },
+        {
+          "id": 1,
+          "text": "Browser xterm.js terminal must display all demo script output in real-time",
+          "deleted": false,
+          "createdAt": "2025-11-08T03:18:17.213Z"
+        },
+        {
+          "id": 2,
+          "text": "MediaRecorder must capture visible terminal content with demo output, not blank screens",
+          "deleted": false,
+          "createdAt": "2025-11-08T03:18:18.062Z"
+        },
+        {
+          "id": 3,
+          "text": "Demo script runs in Node.js process, browser terminal is separate - need communication bridge between them",
+          "deleted": false,
+          "createdAt": "2025-11-08T03:18:18.853Z"
+        }
+      ],
+      "nextRuleId": 4,
+      "examples": [
+        {
+          "id": 0,
+          "text": "Demo script writes 'Hello World' to stdout → stdout captured by recorder → output sent to browser via page.evaluate() → browser terminal displays 'Hello World' → MediaRecorder captures visible content",
+          "deleted": false,
+          "createdAt": "2025-11-08T03:18:25.895Z"
+        },
+        {
+          "id": 1,
+          "text": "Demo script writes multiple lines with delays → each line captured as it's written → all lines sent to browser sequentially → terminal shows progressive output → video captures all lines in sequence",
+          "deleted": false,
+          "createdAt": "2025-11-08T03:18:36.543Z"
+        },
+        {
+          "id": 2,
+          "text": "Current broken behavior: Demo uses console.log() → output goes to Node.js stdout → browser terminal never receives output → terminal shows only '$ ' prompt → video captures blank screen with prompt",
+          "deleted": false,
+          "createdAt": "2025-11-08T03:18:37.368Z"
+        }
+      ],
+      "nextExampleId": 3,
+      "questions": [],
+      "architectureNotes": [],
+      "nextQuestionId": 0,
+      "nextNoteId": 0,
+      "updated": "2025-11-08T04:19:47.677Z"
+    },
+    "VID-011": {
+      "id": "VID-011",
+      "title": "Create fspec demo video using correct tui-test API",
+      "type": "story",
+      "status": "implementing",
+      "createdAt": "2025-11-08T04:23:53.396Z",
+      "updatedAt": "2025-11-08T04:32:28.049Z",
+      "description": "Use @microsoft/tui-test framework correctly to create a demo video showing fspec TUI navigation and features. Demo must be a .test.ts file using test() and terminal fixture, not standalone script.",
+      "children": [],
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T04:23:59.669Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T04:31:11.376Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T04:32:28.049Z"
+        }
+      ],
+      "userStory": {
+        "role": "developer wanting to understand fspec",
+        "action": "watch a demo video of fspec TUI in action",
+        "benefit": "I can see how to navigate and use fspec effectively"
+      },
+      "rules": [
+        {
+          "id": 0,
+          "text": "Demo script MUST be a .test.ts file using @microsoft/tui-test framework",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:19.404Z"
+        },
+        {
+          "id": 1,
+          "text": "Demo MUST use test() function and terminal fixture, not TestController",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:20.154Z"
+        },
+        {
+          "id": 2,
+          "text": "Demo MUST use test.use() to configure fspec TUI as the program",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:20.904Z"
+        },
+        {
+          "id": 3,
+          "text": "Recording MUST produce readable 4K video with fontSize 96px",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:21.645Z"
+        }
+      ],
+      "nextRuleId": 4,
+      "examples": [
+        {
+          "id": 0,
+          "text": "Demo shows fspec TUI loading with work units visible",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:32.319Z"
+        },
+        {
+          "id": 1,
+          "text": "Demo navigates through work units using arrow keys (terminal.keyDown/keyUp)",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:33.096Z"
+        },
+        {
+          "id": 2,
+          "text": "Demo opens a work unit with Enter key (terminal.submit)",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:33.868Z"
+        },
+        {
+          "id": 3,
+          "text": "Demo shows work unit details and navigates back with ESC (terminal.keyEscape)",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:34.639Z"
+        },
+        {
+          "id": 4,
+          "text": "Recording produces FINAL-FSPEC-DEMO.webm in 4K with visible text",
+          "deleted": false,
+          "createdAt": "2025-11-08T04:24:35.391Z"
+        }
+      ],
+      "nextExampleId": 5
     }
   },
   "states": {
     "backlog": [],
     "specifying": [],
     "testing": [],
-    "implementing": [],
+    "implementing": [
+      "VID-011"
+    ],
     "validating": [],
     "done": [
+      "VID-010",
+      "VID-009",
       "VID-007",
       "VID-006",
       "VID-005",
@@ -821,6 +1118,6 @@
     "blocked": []
   },
   "prefixCounters": {
-    "VID": 7
+    "VID": 11
   }
 }
