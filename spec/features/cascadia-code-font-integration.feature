@@ -4,7 +4,6 @@
 @recorder
 @VID-012
 Feature: Cascadia Code Font Integration
-
   """
   Architecture notes:
   - Uses @fontsource/cascadia-code npm package for font delivery
@@ -31,7 +30,6 @@ Feature: Cascadia Code Font Integration
   #   A: true
   #
   # ========================================
-
   Background: User Story
     As a developer using fspec videos
     I want to see terminal output rendered in Cascadia Code font

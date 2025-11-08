@@ -10,6 +10,10 @@
 
 Phase identification tags
 
+| Tag | Description |
+|-----|-------------|
+| `@high` | High priority features for next release phase |
+
 ### Component Tags (Required)
 
 Architectural component tags
@@ -19,6 +23,7 @@ Architectural component tags
 | `@cli` | Command-line interface features |
 | `@demos` | Demo script infrastructure |
 | `@recorder` | Video recorder component |
+| `@web` | Web server and HTTP-related components |
 
 ### Feature Group Tags (Required)
 
@@ -26,6 +31,7 @@ Functional area tags
 
 | Tag | Description |
 |-----|-------------|
+| `@demo-system` | Demo and testing system features |
 | `@feature-management` | Feature and specification management operations |
 | `@validation` | Input validation features |
 | `@video-recording` | Video recording features |
@@ -36,6 +42,7 @@ Technical concern tags
 
 | Tag | Description |
 |-----|-------------|
+| `@interactive-terminal` | Interactive terminal features using xterm.js and PTY |
 | `@puppeteer` | Puppeteer browser automation |
 | `@tui-test` | Features using @microsoft/tui-test framework for terminal automation |
 | `@xterm` | xterm.js terminal emulator |
@@ -89,7 +96,7 @@ Automation integration tags
 
 ## Tag Statistics
 
-_Last updated: 2025-11-08T04:26:14.343Z_
+_Last updated: 2025-11-08T09:08:57.595Z_
 
 **Update Command**: `fspec tag-stats`
 

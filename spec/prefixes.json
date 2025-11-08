@@ -4,6 +4,11 @@
       "prefix": "VID",
       "description": "Video recording and demo features",
       "createdAt": "2025-11-08T00:11:11.779Z"
+    },
+    "TERM": {
+      "prefix": "TERM",
+      "description": "Terminal and xterm.js web interface features",
+      "createdAt": "2025-11-08T07:59:14.642Z"
     }
   }
 }

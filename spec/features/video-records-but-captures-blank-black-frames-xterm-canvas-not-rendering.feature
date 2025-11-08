@@ -7,7 +7,6 @@
 @xterm
 @VID-010
 Feature: Video records but captures blank/black frames - xterm canvas not rendering
-
   """
   Uses Puppeteer page.evaluate() to bridge demo script stdout to browser xterm.js terminal. Demo script runs as separate Node.js process (spawn), stdout captured via child.stdout.on('data'), then injected into browser via window.writeToTerminal() function exposed by server.ts. MediaRecorder captures frames using requestAnimationFrame loop with putImageData() to force canvas repaints. Critical: Demo script and browser terminal are separate processes - stdout capture + page.evaluate bridge is the only way to connect them.
   """
@@ -28,7 +27,6 @@ Feature: Video records but captures blank/black frames - xterm canvas not render
   #   3. Current broken behavior: Demo uses console.log() → output goes to Node.js stdout → browser terminal never receives output → terminal shows only '$ ' prompt → video captures blank screen with prompt
   #
   # ========================================
-
   Background: User Story
     As a developer using fspec.videos
     I want to record terminal demo videos that show actual terminal output

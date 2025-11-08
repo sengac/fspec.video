@@ -5,7 +5,6 @@
 @bug
 @VID-009
 Feature: MediaRecorder produces empty video files - canvas not capturing
-
   """
   Uses Puppeteer browser automation with canvas.captureStream() and MediaRecorder API. xterm.js terminal uses differential rendering - only redraws canvas on content changes. MediaRecorder captures frames only during canvas repaints. Solution requires requestAnimationFrame loop synchronized to recording FPS to force continuous canvas redraws even when terminal content is static.
   """
@@ -30,7 +29,6 @@ Feature: MediaRecorder produces empty video files - canvas not capturing
   #   4. Add requestAnimationFrame loop that calls canvas.getContext('2d').getImageData() to force repaint
   #
   # ========================================
-
   Background: User Story
     As a developer using fspec.videos
     I want to record terminal demo videos that capture all frames

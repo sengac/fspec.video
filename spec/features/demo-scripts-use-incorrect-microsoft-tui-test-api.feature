@@ -5,7 +5,6 @@
 @bug
 @VID-007
 Feature: Demo scripts use incorrect @microsoft/tui-test API
-
   """
   microsoft/tui-test is a test framework (like Vitest/Jest for terminals). Provides test() and expect() functions. Terminal instance passed as fixture. Uses node-pty for PTY and xterm headless for emulation. Demo scripts MUST be .test.ts files run by tui-test CLI, not standalone scripts. See attached docs/tui-test-usage-guide.md for complete migration guide.
   """
@@ -24,7 +23,6 @@ Feature: Demo scripts use incorrect @microsoft/tui-test API
   #   2. fspec TUI: test.use({ program: { file: 'node', args: ['fspec/dist/index.js'] } }); terminal.keyDown();
   #
   # ========================================
-
   Background: User Story
     As a developer using fspec.videos
     I want to write demo scripts using @microsoft/tui-test correctly

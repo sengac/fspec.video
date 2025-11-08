@@ -2,7 +2,7 @@
   "version": "0.7.1",
   "meta": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-08T05:55:12.302Z"
+    "lastUpdated": "2025-11-08T10:04:46.066Z"
   },
   "workUnits": {
     "VID-001": {
@@ -1207,6 +1207,161 @@
       "nextNoteId": 3,
       "estimate": 2,
       "updated": "2025-11-08T05:55:12.307Z"
+    },
+    "TERM-001": {
+      "id": "TERM-001",
+      "title": "fspec in xterm.js web interface",
+      "type": "story",
+      "status": "done",
+      "createdAt": "2025-11-08T07:59:18.220Z",
+      "updatedAt": "2025-11-08T10:04:46.070Z",
+      "description": "Run fspec in a web-based terminal using xterm.js with Cascadia Code font and matching video/test system configuration, served via Express.js with npm run server:fspec command",
+      "children": [],
+      "userStory": {
+        "role": "developer testing fspec",
+        "action": "run fspec commands in a web-based terminal",
+        "benefit": "I can test and demonstrate fspec functionality in a browser environment"
+      },
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-08T07:59:52.542Z"
+        },
+        {
+          "state": "testing",
+          "timestamp": "2025-11-08T10:01:36.893Z"
+        },
+        {
+          "state": "implementing",
+          "timestamp": "2025-11-08T10:02:49.609Z"
+        },
+        {
+          "state": "validating",
+          "timestamp": "2025-11-08T10:04:11.785Z"
+        },
+        {
+          "state": "done",
+          "timestamp": "2025-11-08T10:04:46.070Z"
+        }
+      ],
+      "rules": [
+        {
+          "id": 0,
+          "text": "Server must use the same Cascadia Code font configuration as the existing video recording system",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:01.314Z"
+        },
+        {
+          "id": 1,
+          "text": "Server must be accessible via 'npm run server:fspec' command",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:02.015Z"
+        },
+        {
+          "id": 2,
+          "text": "Terminal must support interactive command execution with real shell backend",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:02.691Z"
+        },
+        {
+          "id": 3,
+          "text": "xterm.js configuration must match existing server.ts settings (fontSize: 96, cols: 120, rows: 30, theme colors)",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:04.539Z"
+        }
+      ],
+      "nextRuleId": 4,
+      "questions": [
+        {
+          "id": 0,
+          "text": "@human: Should the terminal connect to a real shell backend (using node-pty) or just simulate command output for demo purposes?",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:13.552Z",
+          "selected": true,
+          "answer": "Use real shell backend with node-pty to execute actual fspec commands interactively"
+        },
+        {
+          "id": 1,
+          "text": "@human: What port should the server run on? Random port like existing server (port 0) or fixed port like 3000?",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:15.144Z",
+          "selected": true,
+          "answer": "Use fixed port 3000 for easier access and bookmarking during development"
+        },
+        {
+          "id": 2,
+          "text": "@human: Should this be a standalone server or integrate with the existing server.ts? Create new file or extend existing?",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:16.804Z",
+          "selected": true,
+          "answer": "Create standalone server file (server-fspec.ts) to keep concerns separated from video recording server"
+        },
+        {
+          "id": 3,
+          "text": "@human: Do you want the server to auto-open the browser when started, or just print the URL?",
+          "deleted": false,
+          "createdAt": "2025-11-08T08:00:18.959Z",
+          "selected": true,
+          "answer": "Auto-open browser for better developer experience, with URL printed to console as fallback"
+        }
+      ],
+      "nextQuestionId": 4,
+      "examples": [
+        {
+          "id": 0,
+          "text": "Developer runs 'npm run server:fspec', server starts on port 3000, browser opens to http://localhost:3000 showing xterm.js terminal",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:28.953Z"
+        },
+        {
+          "id": 1,
+          "text": "Terminal displays with Cascadia Code font at 96px, 120 cols x 30 rows, matching existing video system appearance",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:32.974Z"
+        },
+        {
+          "id": 2,
+          "text": "User types 'fspec board' in terminal, command executes via node-pty, real output streams back to xterm.js",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:34.579Z"
+        },
+        {
+          "id": 3,
+          "text": "User types 'fspec list-work-units', sees actual work units from project's spec/ directory displayed with formatting",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:36.281Z"
+        },
+        {
+          "id": 4,
+          "text": "Server serves Cascadia Code fonts from /fonts endpoint, @font-face CSS loaded in HTML, terminal renders with ligatures",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:37.666Z"
+        }
+      ],
+      "nextExampleId": 5,
+      "architectureNotes": [
+        {
+          "id": 0,
+          "text": "Create standalone Express server (server-fspec.ts) separate from video recording server",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:54.502Z"
+        },
+        {
+          "id": 1,
+          "text": "Use node-pty to spawn real shell backend for executing fspec commands interactively",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:55.971Z"
+        },
+        {
+          "id": 2,
+          "text": "Match existing server.ts configuration: Cascadia Code font, 96px fontSize, 120x30 terminal size, same theme colors",
+          "deleted": false,
+          "createdAt": "2025-11-08T09:07:57.435Z"
+        }
+      ],
+      "nextNoteId": 3,
+      "estimate": 5,
+      "updated": "2025-11-08T10:04:46.070Z"
     }
   },
   "states": {
@@ -1218,6 +1373,7 @@
     ],
     "validating": [],
     "done": [
+      "TERM-001",
       "VID-012",
       "VID-010",
       "VID-009",
@@ -1232,6 +1388,7 @@
     "blocked": []
   },
   "prefixCounters": {
-    "VID": 12
+    "VID": 12,
+    "TERM": 1
   }
 }
