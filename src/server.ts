@@ -78,18 +78,12 @@ function getTerminalHTML(): string {
       width: 100%;
       height: 100%;
       background-color: #1e1e1e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     #terminal {
-      width: 100%;
-      height: 100%;
-    }
-    .xterm {
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .xterm-screen {
-      width: 100% !important;
-      height: 100% !important;
+      transform-origin: top left;
     }
   </style>
 </head>
@@ -106,7 +100,7 @@ function getTerminalHTML(): string {
       cols: 120,
       rows: 30,
       fontFamily: 'Cascadia Code, monospace',
-      fontSize: 96,
+      fontSize: 16,
       fontWeight: 'normal',
       letterSpacing: 0,
       lineHeight: 1,
@@ -151,6 +145,24 @@ function getTerminalHTML(): string {
     // Open terminal
     term.open(document.getElementById('terminal'));
     // DO NOT use fitAddon.fit() - we want fixed dimensions for recording
+
+    // Scale terminal to fill viewport
+    setTimeout(() => {
+      const termElement = document.querySelector('.xterm');
+      const container = document.getElementById('terminal-container');
+      if (termElement && container) {
+        const termWidth = termElement.offsetWidth;
+        const termHeight = termElement.offsetHeight;
+        const containerWidth = container.offsetWidth;
+        const containerHeight = container.offsetHeight;
+
+        const scaleX = containerWidth / termWidth;
+        const scaleY = containerHeight / termHeight;
+        const scale = Math.min(scaleX, scaleY);
+
+        document.getElementById('terminal').style.transform = 'scale(' + scale + ')';
+      }
+    }, 100);
 
     // Expose terminal to the page for interaction
     window.term = term;

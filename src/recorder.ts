@@ -38,9 +38,9 @@ export async function startRecording(options: RecordingOptions): Promise<void> {
         '--allow-file-access-from-files',
       ],
       defaultViewport: {
-        // 4K resolution for high quality recording
-        width: 3840,
-        height: 2160,
+        // 1080p resolution for high quality recording
+        width: 1920,
+        height: 1080,
       },
     });
 
