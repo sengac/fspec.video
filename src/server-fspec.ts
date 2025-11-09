@@ -120,8 +120,11 @@ function getTerminalHTML(): string {
     const term = new Terminal({
       cols: 120,
       rows: 30,
+      fontFamily: 'Cascadia Code, monospace',
       fontSize: 16,
-      fontFamily: '"Cascadia Code", "Fira Code", "Courier New", monospace',
+      fontWeight: 'normal',
+      letterSpacing: 0,
+      lineHeight: 1,
       convertEol: true,
       theme: {
         background: '#1e1e1e',

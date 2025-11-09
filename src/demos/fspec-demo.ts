@@ -76,6 +76,9 @@ async function fspecDemo() {
   });
 }
 
+// Export for recorder
+export default fspecDemo;
+
 // Run the demo if executed directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   fspecDemo().catch(error => {

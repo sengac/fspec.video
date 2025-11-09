@@ -72,7 +72,7 @@ export async function startRecording(options: RecordingOptions): Promise<void> {
 
     // Start recording using Puppeteer's built-in screencast
     console.log('Starting video capture...');
-    const recorder = await page.screencast({ path: options.outputPath, ffmpegPath: 'ffmpeg' });
+    const recorder = await page.screencast({ path: options.outputPath, ffmpegPath: '/opt/homebrew/bin/ffmpeg' });
 
     // Run the demo script
     console.log('Executing demo script...');
