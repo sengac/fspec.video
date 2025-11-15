@@ -15,12 +15,57 @@ export interface ServerInfo {
 export async function startServer(): Promise<ServerInfo> {
   const app: Express = express();
 
+  // Middleware to parse JSON
+  app.use(express.json());
+
+  // Store SSE clients
+  const streamClients: express.Response[] = [];
+
   // Serve Cascadia Code font files from node_modules
   app.use('/fonts', express.static(join(__dirname, '../node_modules/@fontsource/cascadia-code/files')));
 
   // Serve the terminal HTML page
   app.get('/', (_req, res) => {
     res.send(getTerminalHTML());
+  });
+
+  // Serve the stream viewer page
+  app.get('/stream', (_req, res) => {
+    res.send(getStreamViewerHTML());
+  });
+
+  // POST endpoint to receive terminal output from client
+  app.post('/terminal/output', (req, res) => {
+    const { content, timestamp } = req.body;
+
+    // Broadcast to all SSE clients
+    streamClients.forEach(client => {
+      client.write(`data: ${JSON.stringify({ content, timestamp })}\n\n`);
+    });
+
+    res.sendStatus(200);
+  });
+
+  // SSE endpoint to stream terminal output to browsers
+  app.get('/terminal/stream', (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('X-Accel-Buffering', 'no'); // Disable nginx buffering
+
+    // Send initial connection message
+    res.write(`data: ${JSON.stringify({ type: 'connected', timestamp: Date.now() })}\n\n`);
+
+    // Add client to list
+    streamClients.push(res);
+
+    // Remove client when connection closes
+    req.on('close', () => {
+      const index = streamClients.indexOf(res);
+      if (index !== -1) {
+        streamClients.splice(index, 1);
+      }
+    });
   });
 
   // Start the server
@@ -42,6 +87,109 @@ export async function startServer(): Promise<ServerInfo> {
   };
 
   return { url, cleanup };
+}
+
+function getStreamViewerHTML(): string {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Stream Viewer</title>
+  <style>
+    @font-face {
+      font-family: 'Cascadia Code';
+      src: url('/fonts/cascadia-code-latin-400-normal.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #1e1e1e;
+      overflow: hidden;
+      font-family: 'Cascadia Code', 'Courier New', monospace;
+      color: #d4d4d4;
+    }
+    #container {
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    #status {
+      padding: 10px;
+      background: #2d2d2d;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    #status.connected {
+      background: #0dbc79;
+      color: #000;
+    }
+    #output {
+      flex: 1;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 10px;
+      overflow-y: auto;
+      white-space: pre;
+      font-family: 'Cascadia Code', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="status">Connecting to stream...</div>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const outputEl = document.getElementById('output');
+
+    // Connect to SSE endpoint
+    const eventSource = new EventSource('/terminal/stream');
+
+    eventSource.onopen = () => {
+      statusEl.textContent = '✓ Connected to terminal stream';
+      statusEl.className = 'connected';
+    };
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === 'connected') {
+        console.log('Stream connected at', new Date(data.timestamp));
+      } else if (data.content) {
+        outputEl.textContent = data.content;
+        // Auto-scroll to bottom
+        outputEl.scrollTop = outputEl.scrollHeight;
+      }
+    };
+
+    eventSource.onerror = (error) => {
+      console.error('EventSource error:', error);
+      statusEl.textContent = '✗ Connection lost. Reconnecting...';
+      statusEl.className = '';
+    };
+  </script>
+</body>
+</html>
+  `.trim();
 }
 
 function getTerminalHTML(): string {
@@ -82,9 +230,6 @@ function getTerminalHTML(): string {
       align-items: center;
       justify-content: center;
     }
-    #terminal {
-      transform-origin: top left;
-    }
   </style>
 </head>
 <body>
@@ -96,6 +241,7 @@ function getTerminalHTML(): string {
   <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-canvas@0.7.0/lib/addon-canvas.js"></script>
   <script>
     // Initialize xterm.js
+    // Using 16px font size as requested
     const term = new Terminal({
       cols: 120,
       rows: 30,
@@ -146,24 +292,6 @@ function getTerminalHTML(): string {
     term.open(document.getElementById('terminal'));
     // DO NOT use fitAddon.fit() - we want fixed dimensions for recording
 
-    // Scale terminal to fill viewport
-    setTimeout(() => {
-      const termElement = document.querySelector('.xterm');
-      const container = document.getElementById('terminal-container');
-      if (termElement && container) {
-        const termWidth = termElement.offsetWidth;
-        const termHeight = termElement.offsetHeight;
-        const containerWidth = container.offsetWidth;
-        const containerHeight = container.offsetHeight;
-
-        const scaleX = containerWidth / termWidth;
-        const scaleY = containerHeight / termHeight;
-        const scale = Math.min(scaleX, scaleY);
-
-        document.getElementById('terminal').style.transform = 'scale(' + scale + ')';
-      }
-    }, 100);
-
     // Expose terminal to the page for interaction
     window.term = term;
 
@@ -181,6 +309,37 @@ function getTerminalHTML(): string {
       } else if (data.charCodeAt(0) === 127) { // Backspace
         term.write('\\b \\b');
       }
+    });
+
+    // Monitor terminal output using onWriteParsed (best practice from xterm.js analysis)
+    term.onWriteParsed(() => {
+      const buffer = term.buffer.active;
+
+      // Get entire visible viewport
+      const lines = [];
+      const viewportStart = buffer.ydisp;
+      const viewportEnd = viewportStart + term.rows;
+
+      for (let i = viewportStart; i < viewportEnd; i++) {
+        const line = buffer.lines.get(i);
+        if (line) {
+          lines.push(line.translateToString(true)); // trimRight=true
+        }
+      }
+
+      const terminalContent = lines.join('\\n');
+
+      // Send to server for streaming
+      fetch('/terminal/output', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: terminalContent,
+          timestamp: Date.now()
+        })
+      }).catch(err => {
+        console.error('Failed to send terminal output:', err);
+      });
     });
 
     // Expose functions for demo script interaction

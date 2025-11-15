@@ -2,7 +2,7 @@
 
 IMMEDIATELY - run this command (fspec is already installed locally, so just run it):
 
-fspec --sync-version 0.7.2
+fspec --sync-version 0.8.13
 
 IF the output from this command is an error, asking you to run the "fspec configure-tools" command, RUN THAT FIRST BY FOLLOWING THE INSTRUCTIONS YOU WERE GIVEN.
 

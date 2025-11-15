@@ -46,6 +46,15 @@ export async function startRecording(options: RecordingOptions): Promise<void> {
 
     const page = await browser.newPage();
 
+    // Set viewport based on terminal size with 16px font:
+    // 120 cols × 9.6px = 1152px, 30 rows × 16px = 480px
+    // With 2x deviceScaleFactor: 576 * 2 = 1152, 240 * 2 = 480
+    await page.setViewport({
+      width: 576,
+      height: 240,
+      deviceScaleFactor: 2,
+    });
+
     // Listen to browser console for debugging
     page.on('console', msg => {
       const type = msg.type();
@@ -84,6 +93,31 @@ export async function startRecording(options: RecordingOptions): Promise<void> {
     // Stop recording
     console.log('Stopping video capture...');
     await recorder.stop();
+
+    // Scale video to 1920x1080 with letterboxing using ffmpeg
+    console.log('Scaling video to 1920x1080...');
+    const tempPath = options.outputPath + '.temp.webm';
+    await new Promise<void>((resolve, reject) => {
+      const ffmpeg = spawn('/opt/homebrew/bin/ffmpeg', [
+        '-i', options.outputPath,
+        '-vf', 'scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black',
+        '-c:v', 'libvpx-vp9',
+        '-y',
+        tempPath
+      ]);
+
+      ffmpeg.on('close', (code) => {
+        if (code === 0) {
+          // Replace original with scaled version
+          spawn('mv', [tempPath, options.outputPath]).on('close', () => resolve());
+        } else {
+          reject(new Error(`ffmpeg exited with code ${code}`));
+        }
+      });
+      ffmpeg.on('error', reject);
+    });
+
+    console.log('✅ Recording completed successfully!');
   } finally {
     if (browser) {
       await browser.close();

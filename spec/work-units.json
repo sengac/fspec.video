@@ -2,7 +2,7 @@
   "version": "0.7.1",
   "meta": {
     "version": "1.0.0",
-    "lastUpdated": "2025-11-08T10:04:46.066Z"
+    "lastUpdated": "2025-11-15T07:09:11.339Z"
   },
   "workUnits": {
     "VID-001": {
@@ -1362,11 +1362,100 @@
       "nextNoteId": 3,
       "estimate": 5,
       "updated": "2025-11-08T10:04:46.070Z"
+    },
+    "TERM-002": {
+      "id": "TERM-002",
+      "title": "Claude Code Integration",
+      "type": "story",
+      "status": "specifying",
+      "createdAt": "2025-11-15T07:08:50.854Z",
+      "updatedAt": "2025-11-15T07:09:55.627Z",
+      "description": "Integrate Claude Code AI assistant into the fspec server for interactive project management and AI-assisted workflow",
+      "children": [],
+      "userStory": {
+        "role": "developer using fspec server",
+        "action": "execute fspec commands through Claude Code interface",
+        "benefit": "I can manage my project workflow conversationally with AI assistance"
+      },
+      "stateHistory": [
+        {
+          "state": "specifying",
+          "timestamp": "2025-11-15T07:09:25.165Z"
+        }
+      ],
+      "rules": [
+        {
+          "id": 0,
+          "text": "Claude Code must be able to execute fspec commands through the server API",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:31.448Z"
+        },
+        {
+          "id": 1,
+          "text": "Server must expose fspec command execution endpoint for Claude Code",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:32.984Z"
+        },
+        {
+          "id": 2,
+          "text": "Command responses must be returned to Claude Code for display",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:34.263Z"
+        }
+      ],
+      "nextRuleId": 3,
+      "examples": [
+        {
+          "id": 0,
+          "text": "User asks Claude Code to create a new story, Claude executes 'fspec create-story PREFIX Title', server returns work unit ID",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:42.436Z"
+        },
+        {
+          "id": 1,
+          "text": "User asks Claude Code to show current board, Claude executes 'fspec board', server returns formatted Kanban board",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:44.238Z"
+        },
+        {
+          "id": 2,
+          "text": "User asks Claude Code to move work unit to testing, Claude executes 'fspec update-work-unit-status ID testing', server confirms status change",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:46.216Z"
+        }
+      ],
+      "nextExampleId": 3,
+      "questions": [
+        {
+          "id": 0,
+          "text": "@human: Should the fspec command execution endpoint use WebSocket or HTTP POST?",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:52.758Z",
+          "selected": false
+        },
+        {
+          "id": 1,
+          "text": "@human: Should command output be streamed in real-time or returned all at once?",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:54.120Z",
+          "selected": false
+        },
+        {
+          "id": 2,
+          "text": "@human: Should there be any authentication/authorization for the Claude Code endpoint?",
+          "deleted": false,
+          "createdAt": "2025-11-15T07:09:55.627Z",
+          "selected": false
+        }
+      ],
+      "nextQuestionId": 3
     }
   },
   "states": {
     "backlog": [],
-    "specifying": [],
+    "specifying": [
+      "TERM-002"
+    ],
     "testing": [],
     "implementing": [
       "VID-011"
@@ -1389,6 +1478,6 @@
   },
   "prefixCounters": {
     "VID": 12,
-    "TERM": 1
+    "TERM": 2
   }
 }
